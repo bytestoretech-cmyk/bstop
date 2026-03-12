@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BsTop Manager - La suite definitiva per ottimizzare, velocizzare e mettere in sicurezza Windows.">
+    
+    <title>BsTop Manager 🚀 - Ottimizzazione Windows Definitiva</title>
+    <style>
+        :root {
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.5);
+            --secondary: #f97316;
+            --bg-dark: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7); /* Glass effect base */
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --gradient-title: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(249, 115, 22, 0.1) 0%, transparent 20%);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Particles */
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        .particle {
+            position: absolute; background: var(--primary); border-radius: 50%; opacity: 0.2;
+            animation: floatParticle 15s infinite linear;
+        }
+        @keyframes floatParticle {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 0.4; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Navbar */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; border-radius: 20px; margin-bottom: 60px; }
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 700; color: var(--primary); letter-spacing: -0.5px; }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { color: var(--text-light); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: 0.3s; position: relative; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero */
+        .hero { text-align: center; padding: 40px 0 80px; position: relative; }
+        .hero-main-logo {
+            max-width: 100%; height: auto; max-height: 180px; 
+            filter: drop-shadow(0 0 30px rgba(56, 189, 248, 0.4));
+            animation: slideDown 0.8s ease-out, floatHero 6s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes floatHero { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .hero .subtitle { font-size: 1.4rem; color: var(--text-muted); margin-bottom: 40px; font-weight: 300; max-width: 700px; margin: 0 auto; }
+        
+        .cta-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 16px 36px; font-size: 1.1rem; font-weight: 700; border-radius: 50px; text-decoration: none; display: inline-flex; align-items: center; gap: 12px; transition: all 0.3s; }
+        .btn-primary { background: var(--primary); color: var(--bg-dark); box-shadow: 0 0 20px rgba(56, 189, 248, 0.4); }
+        .btn-primary:hover { background: #fff; transform: translateY(-3px) scale(1.02); }
+        .btn-secondary { background: rgba(255,255,255,0.05); color: var(--text-light); border: 1px solid rgba(255,255,255,0.2); }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: var(--primary); transform: translateY(-3px); }
+
+        /* Features */
+        .features { margin: 100px 0; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.8rem; margin-bottom: 10px; color: var(--text-light); }
+        .section-header span { color: var(--primary); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px; font-weight: 700; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .feature-card { padding: 35px; border-radius: 24px; transition: 0.4s; border: 1px solid rgba(255,255,255,0.05); background: linear-gradient(145deg, rgba(30,41,59,0.7) 0%, rgba(15,23,42,0.8) 100%); }
+        .feature-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5); }
+        .feature-icon { font-size: 3rem; margin-bottom: 20px; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border-radius: 18px; border: 1px solid rgba(56,189,248,0.2); background: linear-gradient(135deg, rgba(56,189,248,0.2), rgba(56,189,248,0)); }
+        .feature-card h3 { font-size: 1.4rem; margin-bottom: 10px; color: #fff; }
+        .feature-card p { color: var(--text-muted); font-size: 1rem; }
+
+        /* --- CAROUSEL / SLIDER STYLES UPDATED --- */
+        .screenshots { margin: 100px 0; position: relative; }
+        
+        .slider-wrapper {
+            position: relative;
+            max-width: 100%;
+            padding: 0 50px; /* Space for arrows */
+        }
+
+        .screenshots-slider {
+            display: flex;
+            gap: 40px;
+            overflow-x: auto;
+            padding: 60px 20px;
+            cursor: grab; /* Cursore mano aperta */
+            scroll-behavior: smooth; /* Smooth scroll per le frecce */
+            /* Hide Scrollbar */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+            perspective: 1000px;
+        }
+        
+        .screenshots-slider.dragging {
+            cursor: grabbing; /* Cursore mano chiusa mentre trascini */
+            scroll-behavior: auto; /* Disabilita smooth scroll durante il drag per reattività */
+        }
+
+        .screenshots-slider::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
+
+        .screenshot-item {
+            flex: 0 0 500px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            /* Default state: slightly smaller and transparent */
+            transform: scale(0.9);
+            opacity: 0.6;
+            filter: blur(1px);
+        }
+
+        /* Active/Center item style */
+        .screenshot-item.active {
+            transform: scale(1.1);
+            opacity: 1;
+            filter: blur(0);
+            border-color: var(--primary);
+            box-shadow: 0 0 40px rgba(56, 189, 248, 0.4);
+            z-index: 10;
+        }
+
+        .screenshot-item img { width: 100%; height: auto; display: block; pointer-events: none; /* Evita drag dell'immagine stessa */ }
+        
+        .screenshot-badge {
+            position: absolute; bottom: 15px; left: 15px; background: rgba(0,0,0,0.7);
+            color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; backdrop-filter: blur(4px);
+        }
+
+        /* Navigation Arrows */
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--primary);
+            font-size: 24px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            z-index: 20;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .slider-arrow:hover { background: var(--primary); color: #fff; box-shadow: 0 0 20px rgba(56,189,248,0.6); transform: translateY(-50%) scale(1.1); }
+        .arrow-prev { left: 0; }
+        .arrow-next { right: 0; }
+
+        /* Pricing & Steps & Footer (Standard) */
+        .pricing-card { background: linear-gradient(180deg, rgba(30,41,59,0.9) 0%, rgba(15,23,42,0.95) 100%); border: 1px solid var(--primary); box-shadow: 0 0 50px rgba(56, 189, 248, 0.15); border-radius: 30px; padding: 50px; max-width: 480px; margin: 0 auto; position: relative; text-align: center; }
+        .promo-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--secondary); color: white; padding: 8px 25px; border-radius: 50px; font-weight: 700; box-shadow: 0 5px 15px rgba(249, 115, 22, 0.4); font-size: 0.9rem; text-transform: uppercase; }
+        .price { font-size: 4.5rem; font-weight: 800; color: #fff; margin: 20px 0; line-height: 1; }
+        .price span { font-size: 1.5rem; color: var(--text-muted); font-weight: 500; }
+        .price-features li { padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text-light); display: flex; align-items: center; gap: 15px; text-align: left; }
+        .price-features li svg { width: 20px; height: 20px; fill: var(--success); flex-shrink: 0; }
+        
+        .how-to-buy { margin: 100px 0; background: linear-gradient(180deg, rgba(30,41,59,0.5) 0%, rgba(15,23,42,0.5) 100%); border-radius: 30px; padding: 60px; border: 1px solid rgba(255,255,255,0.05); }
+        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 50px; }
+        .step { position: relative; z-index: 1; text-align: left; }
+        .step-number { font-size: 4rem; font-weight: 900; color: rgba(255,255,255,0.05); position: absolute; top: -30px; right: 0; z-index: -1; line-height: 1; }
+        .step h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.3rem; }
+        .step p { font-size: 0.95rem; color: var(--text-muted); }
+
+        .footer { margin-top: 80px; padding: 60px 0 30px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; }
+        .footer-links a { margin: 0 15px; color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--primary); }
+
+        /* Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+        .modal.active { display: flex; opacity: 1; }
+        .modal-content { max-width: 90%; max-height: 90vh; border-radius: 8px; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+        .modal-close { position: absolute; top: 20px; right: 30px; font-size: 40px; color: #fff; cursor: pointer; }
+
+        /* Audio Button */
+        .audio-btn { position: fixed; bottom: 30px; left: 30px; z-index: 1000; width: 50px; height: 50px; border-radius: 50%; background: rgba(30, 41, 59, 0.8); border: 1px solid var(--primary); color: var(--primary); display: flex; align-items: center; justify-content: center; cursor: pointer; backdrop-filter: blur(5px); box-shadow: 0 0 15px rgba(56, 189, 248, 0.3); transition: all 0.3s ease; }
+        .audio-btn:hover { transform: scale(1.1); background: var(--primary); color: var(--bg-dark); box-shadow: 0 0 25px rgba(56, 189, 248, 0.6); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero-logo-img { width: 120px; }
+            .navbar { flex-direction: column; gap: 20px; padding: 20px; }
+            .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; }
+            .btn { width: 100%; justify-content: center; }
+            .pricing-card { padding: 30px; }
+            .slider-wrapper { padding: 0 10px; }
+            .screenshot-item { flex: 0 0 80vw; }
+            .slider-arrow { display: none; /* Nascondi frecce su mobile, usa swipe */ }
+        }
+    </style>
+</head>
+<body>
+    <!-- Audio Elements -->
+    <audio id="bgAudio" src="suono.mp3" preload="auto"></audio>
+    <div class="audio-btn" id="audioToggle" title="Attiva/Disattiva Audio">
+        <svg id="icon-on" style="display: none; width: 24px; height: 24px;" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        <svg id="icon-off" style="display: block; width: 24px; height: 24px;" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+    </div>
+
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <!-- Navbar -->
+        <nav class="navbar glass-panel">
+            <div class="logo">
+                <span style="font-size: 1.8rem;">🚀</span> BsTop Manager
+            </div>
+            <div class="nav-links">
+                <a href="#features">Funzionalità</a>
+                <a href="#screenshots">Anteprima</a>
+                <a href="#pricing">Licenza</a>
+                <a href="#how-to-buy">Guida</a>
+            </div>
+        </nav>
+
+        <!-- Hero -->
+        <section class="hero">
+            <img src="logo.jpg" alt="BsTop Manager Logo" class="hero-main-logo">
+            <p class="subtitle">Trasforma il tuo PC Windows. Ottimizza i processi, blinda la sicurezza e libera la vera potenza del tuo hardware con un click.</p>
+            <div class="cta-buttons">
+                <a href="https://bytestoretech.sumupstore.com/prodotto/bstop-manager-la-suite-definitiva-per-l-ottimizzazione-di-windows-1" class="btn btn-primary" target="_blank">🛒 Acquista Licenza</a>
+                <a href="https://kdrive.infomaniak.com/app/share/1609874/ae2bf9ee-22ef-464e-846b-e8f4450bd372" class="btn btn-secondary" target="_blank">⬇️ Scarica la Demo</a>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features" id="features">
+            <div class="section-header"><span>Potenza Pura</span><h2>Cosa può fare per te?</h2></div>
+            <div class="features-grid">
+                <div class="feature-card glass-panel"><div class="feature-icon">🚀</div><h3>Boost FPS & Gaming</h3><p>Disattiva i servizi inutili in background, libera RAM e CPU per garantire prestazioni massime.</p></div>
+                <div class="feature-card glass-panel"><div class="feature-icon">🛡️</div><h3>Sicurezza AI Active</h3><p>Monitoraggio intelligente delle minacce e configurazione avanzata di Windows Defender.</p></div>
+                <div class="feature-card glass-panel"><div class="feature-icon">🧹</div><h3>Pulizia Profonda</h3><p>Elimina file spazzatura, cache residue e tracce di privacy che rallentano il sistema.</p></div>
+                <div class="feature-card glass-panel"><div class="feature-icon">⚙️</div><h3>Controllo Totale</h3><p>Gestisci Windows Update, Driver e Servizi critici con un'interfaccia semplice.</p></div>
+                <div class="feature-card glass-panel"><div class="feature-icon">🎨</div><h3>Personalizzazione</h3><p>5 Temi Esclusivi (Neon, Cyberpunk, Minimal...) per adattare l'estetica al tuo setup.</p></div>
+                <div class="feature-card glass-panel"><div class="feature-icon">🔧</div><h3>Toolbox Integrata</h3><p>Accesso rapido a utility di sistema, script personalizzati e fix rapidi.</p></div>
+            </div>
+        </section>
+
+        <!-- Screenshots Section UPDATED -->
+        <section class="screenshots" id="screenshots">
+            <div class="section-header">
+                <span>Interfaccia</span>
+                <h2>Guarda BsTop in Azione</h2>
+            </div>
+            
+            <div class="slider-wrapper">
+                <!-- Frecce di Navigazione -->
+                <div class="slider-arrow arrow-prev" id="prevBtn">&#10094;</div>
+                <div class="slider-arrow arrow-next" id="nextBtn">&#10095;</div>
+
+                <div class="screenshots-slider" id="slider">
+                    <!-- Sostituisci i link con le immagini reali -->
+                    <div class="screenshot-item" data-src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/90d10007-688f-40a1-a1f5-3cbe71aaedf1">
+                        <img src="im6.png" alt="Interfaccia Principale">
+                        <div class="screenshot-badge">Supporto</div>
+                    </div>
+                    
+                    <div class="screenshot-item" data-src="im1.png">
+                        <img src="im1.png" alt="Gestione Aggiornamenti">
+                        <div class="screenshot-badge">Win Update Manager</div>
+                    </div>
+                    
+                    <div class="screenshot-item" data-src="im2.png">
+                        <img src="im2.png" alt="Utility">
+                        <div class="screenshot-badge">Utility & Tools</div>
+                    </div>
+
+                    <div class="screenshot-item" data-src="im3.png">
+                        <img src="im3.png" alt="Sicurezza">
+                        <div class="screenshot-badge">Sicurezza AI</div>
+                    </div>
+
+                    <div class="screenshot-item" data-src="im4.png">
+                        <img src="im4.png" alt="Ottimizzazione">
+                        <div class="screenshot-badge">Boost Prestazioni</div>
+                    </div>
+
+                    <div class="screenshot-item" data-src="im5.png">
+                        <img src="im5.png" alt="Pulizia">
+                        <div class="screenshot-badge">Pulizia Sistema</div>
+                    </div>
+
+                    <div class="screenshot-item" data-src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/2ebdd43d-87b9-47cf-95d4-56e685e6726f">
+                        <img src="im7.png" alt="Link Utili">
+                        <div class="screenshot-badge">Controlli</div>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 15px; color: var(--text-muted);">👆 Trascina o usa le frecce, clicca per ingrandire</p>
+        </section>
+
+        <!-- Pricing -->
+        <section class="pricing" id="pricing">
+            <div class="section-header"><span>Offerta Limitata</span><h2>Scegli il Piano Lifetime</h2></div>
+            <div class="pricing-card">
+                <div class="promo-badge">🔥 Best Seller</div>
+                <h3>Licenza PRO</h3>
+                <div class="price">39<span>,99 €</span></div>
+                <p style="color: var(--text-muted); margin-bottom: 30px;">Pagamento unico. Nessun abbonamento mensile.</p>
+                <ul class="price-features">
+                    <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Licenza a vita per 1 PC</li>
+                    <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> 6 Mesi di Aggiornamenti Gratuiti</li>
+                    <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Accesso a TUTTE le funzionalità</li>
+                    <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Supporto Prioritario ByteStoreTech</li>
+                    <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Accedi al Canale Discord di Gentiluomo Digitale</li>
+                </ul>
+                <a href="https://bytestoretech.sumupstore.com/prodotto/bstop-manager-la-suite-definitiva-per-l-ottimizzazione-di-windows-1" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 20px;" target="_blank">Acquista Ora</a>
+            </div>
+        </section>
+
+        <!-- How to Buy -->
+        <section class="how-to-buy glass-panel" id="how-to-buy">
+            <h2 style="text-align: center; margin-bottom: 20px; font-size: 2.2rem;">📝 Guida all'Attivazione</h2>
+            <p style="text-align: center; color: var(--text-muted);">Il sistema di protezione BsTop utilizza il tuo indirizzo MAC univoco.</p>
+            <div class="steps">
+                <div class="step"><div class="step-number">1</div><h3>Scarica l'App</h3><p>Scarica ed esegui il software. All'avvio, l'app mostrerà il tuo <strong>Indirizzo MAC</strong>.</p></div>
+                <div class="step"><div class="step-number">2</div><h3>Copia il MAC</h3><p>Annota il codice MAC. È l'impronta digitale del tuo PC e serve a generare la tua licenza personale.</p></div>
+                <div class="step"><div class="step-number">3</div><h3>Acquista</h3><p>Ora il MAC Address invialo via email a bytestoretech@gmail.com dopo il pagamento.</p></div>
+                <div class="step"><div class="step-number">4</div><h3>Attiva</h3><p>Entro 24/72h riceverai la tua Key via email. Inseriscila nell'app e goditi la potenza completa!</p></div>
+            </div>
+            <div style="margin-top: 40px; text-align: center;"><a href="https://bytestoretech.it/contatti/" class="btn btn-secondary" target="_blank">Hai bisogno di aiuto? Contatta il supporto</a></div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="https://bytestoretech.sumupstore.com" target="_blank">Store</a>
+                <a href="https://www.youtube.com/@Mister-Pc-Kris" target="_blank">YouTube Tutorials</a>
+                <a href="#" target="_blank">Privacy Policy</a>
+                <a href="https://bytestoretech.it/contatti/" target="_blank">Assistenza</a>
+            </div>
+            <p style="margin-top: 30px; color: var(--text-muted); font-size: 0.9rem;">&copy; 2026 ByteStoreTech Software Solutions.</p>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="imageModal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <div class="modal-content-wrapper" style="text-align: center;">
+            <img id="modalImage" class="modal-content" src="" alt="Screenshot">
+        </div>
+    </div>
+
+    <script>
+        // --- 1. Particles ---
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 4 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+        window.addEventListener('load', createParticles);
+
+        // --- 2. Audio Logic ---
+        const audio = document.getElementById('bgAudio');
+        const btn = document.getElementById('audioToggle');
+        const iconOn = document.getElementById('icon-on');
+        const iconOff = document.getElementById('icon-off');
+        let hasInteracted = false;
+        
+        audio.muted = false; audio.volume = 1.0; audio.loop = false;
+
+        function updateIcon() {
+            if (!audio.paused) { iconOn.style.display = 'block'; iconOff.style.display = 'none'; }
+            else { iconOn.style.display = 'none'; iconOff.style.display = 'block'; }
+        }
+
+        function forcePlayOnInteraction() {
+            if (hasInteracted) return;
+            audio.play().then(() => {
+                hasInteracted = true; updateIcon();
+                document.removeEventListener('click', forcePlayOnInteraction);
+                document.removeEventListener('keydown', forcePlayOnInteraction);
+                document.removeEventListener('scroll', forcePlayOnInteraction);
+            }).catch(e => console.log("Audio blocked: " + e));
+        }
+
+        window.addEventListener('load', () => {
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => { hasInteracted = true; updateIcon(); })
+                .catch(() => {
+                    document.addEventListener('click', forcePlayOnInteraction);
+                    document.addEventListener('keydown', forcePlayOnInteraction);
+                    document.addEventListener('scroll', forcePlayOnInteraction);
+                });
+            }
+        });
+
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (audio.paused) audio.play(); else audio.pause();
+            updateIcon(); hasInteracted = true;
+        });
+        audio.addEventListener('ended', updateIcon);
+
+        // --- 3. Carousel Logic (Drag + Arrows + Focus Animation) ---
+        const slider = document.getElementById('slider');
+        const sliderItems = document.querySelectorAll('.screenshot-item');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let isDragging = false; // To distinguish drag from click
+
+        // Center Focus Animation
+        function updateCarouselFocus() {
+            const center = slider.scrollLeft + (slider.offsetWidth / 2);
+            
+            sliderItems.forEach(item => {
+                const itemCenter = item.offsetLeft + (item.offsetWidth / 2);
+                const distance = Math.abs(center - itemCenter);
+                
+                // If item is close to center (within 250px), scale it up
+                if (distance < 300) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        // Call on scroll and init
+        slider.addEventListener('scroll', updateCarouselFocus);
+        window.addEventListener('resize', updateCarouselFocus);
+        updateCarouselFocus(); // Init
+
+        // Mouse Down (Start Drag)
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            isDragging = false;
+            slider.classList.add('dragging');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        // Mouse Leave/Up (Stop Drag)
+        slider.addEventListener('mouseleave', () => { isDown = false; slider.classList.remove('dragging'); });
+        slider.addEventListener('mouseup', () => { 
+            isDown = false; 
+            slider.classList.remove('dragging'); 
+        });
+
+        // Mouse Move (Dragging)
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            isDragging = true; // Flag as dragging
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // Scroll speed
+            slider.scrollLeft = scrollLeft - walk;
+        });
+
+        // Click on Item (Open Modal only if NOT dragging)
+        sliderItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                if (isDragging) {
+                    e.preventDefault(); // Stop click if we were dragging
+                    return;
+                }
+                openModal(item.dataset.src);
+            });
+        });
+
+        // Arrows Click
+        prevBtn.addEventListener('click', () => {
+            slider.scrollLeft -= 550; // Larghezza item + gap
+        });
+        nextBtn.addEventListener('click', () => {
+            slider.scrollLeft += 550;
+        });
+
+        // --- 4. Modal Logic ---
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        function openModal(src) {
+            modalImg.src = src;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+        // Smooth Scroll for Anchors
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
